@@ -1133,27 +1133,7 @@ update()
     do{
         CPTLog(Event_Hal_Adapter_MtkPhotoPreview_proc, CPTFlagStart);         
         //(1)
-		if ( ! updateOne() )
-		{
-			int retryCnt = 2;
-			MY_LOGW("updateOne frame failed");
-			for (int i = 0; i < retryCnt; i++) 
-			{
-				stop();
-				start();
-				delay(EQueryType_Init);		
-				MY_LOGW("updateOne one failed try restart data path");
-				if (updateOne())
-				{
-					MY_LOGD("updateOne success.");
-					break;
-				}
-				else 
-				{
-					MY_LOGE("updateOne still failed.");
-				}
-			}			
-		}	 
+        updateOne();
         
         MY_LOGD_IF(ENABLE_LOG_PER_FRAME, "frameCnt(%d)",mFrameCnt);
         mFrameCnt++;
@@ -1317,14 +1297,10 @@ updateOne()
 
     
     getHw()->enque(&vEnBufPass2In, &vEnBufPass2Out);
-	
-    if ( ! getHw()->deque((EHwBufIdx)flag, &vDeBufPass2Out) )
-    {
+    getHw()->deque((EHwBufIdx)flag, &vDeBufPass2Out);
     
-	    MY_LOGW("deque pass2 frame failed");
-        return false;           
-    }    
-    
+   
+
     //*************************************************************
     // (3) return buffer
     //*************************************************************

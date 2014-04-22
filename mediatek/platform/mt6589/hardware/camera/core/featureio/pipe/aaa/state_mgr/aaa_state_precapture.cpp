@@ -337,20 +337,20 @@ sendIntent(intent2type<eIntent_CaptureStart>)
                 return err;
             }
 
-            err = BufMgr::getInstance().AAStatEnable(MTRUE);
-            if (FAILED(err)) {
-                MY_ERR("BufMgr::getInstance().AAStatEnable(MTRUE) fail\n");
-                return err;
-            }
+        err = BufMgr::getInstance().AAStatEnable(MTRUE);
+        if (FAILED(err)) {
+            MY_ERR("BufMgr::getInstance().AAStatEnable(MTRUE) fail\n");
+            return err;
+        }
 
-            AfMgr::getInstance().setBestShotConfig();
+        AfMgr::getInstance().setBestShotConfig();
 
-            // AFO DMA / state enable again
-            err = BufMgr::getInstance().DMAInit(camdma2type<ECamDMA_AFO>());
-            if (FAILED(err)) {
-                MY_ERR("BufMgr::getInstance().DMAInit(ECamDMA_AFO) fail\n");
-                return err;
-            }
+        // AFO DMA / state enable again
+        err = BufMgr::getInstance().DMAInit(camdma2type<ECamDMA_AFO>());
+        if (FAILED(err)) {
+            MY_ERR("BufMgr::getInstance().DMAInit(ECamDMA_AFO) fail\n");
+            return err;
+        }
 
             err = BufMgr::getInstance().AFStatEnable(MTRUE);
             if (FAILED(err)) {

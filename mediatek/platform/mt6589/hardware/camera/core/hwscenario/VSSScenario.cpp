@@ -799,12 +799,8 @@ deque(EHwBufIdx port, vector<PortQTBufInfo> *pBufIn)
             mpPostProcPipe->sendCommand((MINT32)EPIPECmd_SET_CURRENT_BUFFER, (MINT32)EPortIndex_VIDO,0,0);
         }
         mpPostProcPipe->start();
-	
-        if ( ! mpPostProcPipe->irq(EPipePass_PASS2,EPIPEIRQ_PATH_DONE))
-        {
-            MY_LOGE("mpPostProcPipe->irq fail");
-            return false;
-        }
+
+        mpPostProcPipe->irq(EPipePass_PASS2,EPIPEIRQ_PATH_DONE);
         //
         if (port & eID_Pass2DISPO) {
             PortID rPortID;

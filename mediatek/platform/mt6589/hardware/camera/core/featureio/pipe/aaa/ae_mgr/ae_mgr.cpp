@@ -1150,9 +1150,10 @@ MUINT32 u4DFpsThres = 0;
                     UpdateSensorISPParams(AE_MANUAL_FRAMERATE_STATE);
                 } else {
                     if(bRestore == 0)
-                        UpdateSensorISPParams(AE_AUTO_FRAMERATE_STATE);
+                    UpdateSensorISPParams(AE_AUTO_FRAMERATE_STATE);
                     else
-                        UpdateSensorISPParams(AE_AF_RESTORE_STATE);
+                    	UpdateSensorISPParams(AE_AF_RESTORE_STATE);
+
                 }
             }
         } else {
@@ -1447,12 +1448,12 @@ strAEOutput rAEOutput;
     if(m_bEnableAE) {
         MY_LOG("doBackAEInfo\n");
 
-        rAEInput.eAeState = AE_STATE_BACKUP_PREVIEW;
-        rAEInput.pAESatisticBuffer = NULL;
-        if(m_pIAeAlgo != NULL) {
-            m_pIAeAlgo->handleAE(&rAEInput, &rAEOutput);
-        } else {
-            MY_LOG("The AE algo class is NULL (34)\n");
+    rAEInput.eAeState = AE_STATE_BACKUP_PREVIEW;
+    rAEInput.pAESatisticBuffer = NULL;
+    if(m_pIAeAlgo != NULL) {
+        m_pIAeAlgo->handleAE(&rAEInput, &rAEOutput);
+    } else {
+        MY_LOG("The AE algo class is NULL (34)\n");
         }
     } else {
         MY_LOG("[doBackAEInfo] AE don't enable Enable:%d\n", m_bEnableAE);
@@ -1617,42 +1618,42 @@ strAEInput rAEInput;
 strAEOutput rAEOutput;
 
     if(m_bEnableAE) {
-        MY_LOG("doRestoreAEInfo+\n");
-        rAEInput.eAeState = AE_STATE_RESTORE_PREVIEW;
-        rAEInput.pAESatisticBuffer = NULL;
-        if(m_pIAeAlgo != NULL) {
-            m_pIAeAlgo->handleAE(&rAEInput, &rAEOutput);
-        } else {
-            MY_LOG("The AE algo class is NULL (35)\n");
-        }
-  
-         copyAEInfo2mgr(&g_rAEOutput.rPreviewMode, &rAEOutput);
-        prepareCapParams();
-        MY_LOG("[getPreviewParams3] Exp. mode: %d Preview Shutter:%d Sensor gain:%d Isp gain:%d frame rate:%d flare:%d %d ISO:%d\n",
+    MY_LOG("doRestoreAEInfo+\n");
+    rAEInput.eAeState = AE_STATE_RESTORE_PREVIEW;
+    rAEInput.pAESatisticBuffer = NULL;
+    if(m_pIAeAlgo != NULL) {
+        m_pIAeAlgo->handleAE(&rAEInput, &rAEOutput);
+    } else {
+        MY_LOG("The AE algo class is NULL (35)\n");
+    }
+
+    copyAEInfo2mgr(&g_rAEOutput.rPreviewMode, &rAEOutput);
+    prepareCapParams();
+    MY_LOG("[getPreviewParams3] Exp. mode: %d Preview Shutter:%d Sensor gain:%d Isp gain:%d frame rate:%d flare:%d %d ISO:%d\n",
                    g_rAEOutput.rPreviewMode.u4ExposureMode, g_rAEOutput.rPreviewMode.u4Eposuretime, g_rAEOutput.rPreviewMode.u4AfeGain,
                    g_rAEOutput.rPreviewMode.u4IspGain, g_rAEOutput.rPreviewMode.u2FrameRate, g_rAEOutput.rPreviewMode.i2FlareGain, g_rAEOutput.rPreviewMode.i2FlareOffset, g_rAEOutput.rPreviewMode.u4RealISO);
 
-        g_rExp = g_rAEOutput.rPreviewMode.u4Eposuretime;
-        g_rAfe = g_rAEOutput.rPreviewMode.u4AfeGain;
-        g_rIsp = g_rAEOutput.rPreviewMode.u4IspGain;
+    g_rExp = g_rAEOutput.rPreviewMode.u4Eposuretime;
+    g_rAfe = g_rAEOutput.rPreviewMode.u4AfeGain;
+    g_rIsp = g_rAEOutput.rPreviewMode.u4IspGain;
 
 
-        m_u4PreExposureTime = g_rAEOutput.rPreviewMode.u4Eposuretime;
-        m_u4PreSensorGain = g_rAEOutput.rPreviewMode.u4AfeGain;
+     m_u4PreExposureTime = g_rAEOutput.rPreviewMode.u4Eposuretime;
+     m_u4PreSensorGain = g_rAEOutput.rPreviewMode.u4AfeGain;
 
     //g_rAEOutput.rAFMode
-        int rollFrmTime;
-        if(m_eAECamMode == LIB3A_AECAM_MODE_ZSD)
-            rollFrmTime = 66000;
-        else
-            rollFrmTime = 33000;
+		int rollFrmTime;
+		if(m_eAECamMode == LIB3A_AECAM_MODE_ZSD)
+			rollFrmTime = 66000;
+		else
+			rollFrmTime = 33000;
 
-         g_rIspAFLampOff = mapAFLampOffIsp2(rollFrmTime, g_rExp, g_rAfe, g_rIsp,
+    g_rIspAFLampOff = mapAFLampOffIsp2(rollFrmTime, g_rExp, g_rAfe, g_rIsp,
                                      g_rAEOutput.rAFMode.u4Eposuretime, g_rAEOutput.rAFMode.u4AfeGain, g_rAEOutput.rAFMode.u4IspGain);
 
-         //m_i4WaitVDNum = 0;   // reset the Vd count
-        //m_bRestoreAE = MTRUE; // restore AE
-        MY_LOG("doRestoreAEInfo-\n");
+     //m_i4WaitVDNum = 0;   // reset the Vd count
+    //m_bRestoreAE = MTRUE; // restore AE
+    MY_LOG("doRestoreAEInfo-\n");
     }else {
         MY_LOG("[doRestoreAEInfo] AE don't enable Enable:%d\n", m_bEnableAE);
     }

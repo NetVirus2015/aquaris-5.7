@@ -606,22 +606,9 @@ evaluate_Shading_CCT_index  (
     switch  (rCamInfo.eIdx_Shading_CCT)
     {
     case eIDX_Shading_CCT_ALight:
-        if  ( i4CCT < THH1 ) 
+        if  ( i4CCT < THL1 ) 
         {
-        	//20130103 Jouny
-#if 0
-        	if(i4PT > TH4 || i4PW > TH4)
-        	{
-        		eIdx_Shading_CCT_new = eIDX_Shading_CCT_ALight;
-        	}
-			else
-			{
-				eIdx_Shading_CCT_new = eIDX_Shading_CCT_CWF;
-			} 
-#else
 			eIdx_Shading_CCT_new = eIDX_Shading_CCT_ALight;
-#endif
-			
         }
         else if ( i4CCT <  TH2)
         {
@@ -629,34 +616,13 @@ evaluate_Shading_CCT_index  (
         }
         else
         {
-        	//20130103 Jouny
-        	if(i4DFIDX < TH3)
-        	{
-        		eIdx_Shading_CCT_new = eIDX_Shading_CCT_CWF;
-        	}
-			else
-			{
             	eIdx_Shading_CCT_new = eIDX_Shading_CCT_D65;
 			}
-        }
         break;
     case eIDX_Shading_CCT_CWF:
         if  ( i4CCT < THL1 )
         {
-        	//20130103 Jouny
-#if 0
-        	if(i4PT > TH4 || i4PW > TH4)
-        	{
-        		eIdx_Shading_CCT_new = eIDX_Shading_CCT_ALight;
-        	}
-			else
-			{
-				eIdx_Shading_CCT_new = eIDX_Shading_CCT_CWF;
-			} 
-#else
 			eIdx_Shading_CCT_new = eIDX_Shading_CCT_ALight;
-#endif
-
         }
         else if ( i4CCT < THH2 )
         {
@@ -664,35 +630,13 @@ evaluate_Shading_CCT_index  (
         }
         else
         {
-        	//20130103 Jouny
-        	if(i4DFIDX < TH3)
-        	{
-        		eIdx_Shading_CCT_new = eIDX_Shading_CCT_CWF;
-        	}
-			else
-			{
             	eIdx_Shading_CCT_new = eIDX_Shading_CCT_D65;
 			}
-
-        }
         break;
     case eIDX_Shading_CCT_D65:
-        if  ( i4CCT < TH1 )
+        if  ( i4CCT < THL1 )
         {
-        	//20130103 Jouny
-#if 0
-        	if(i4PT > TH4 || i4PW > TH4)
-        	{
-        		eIdx_Shading_CCT_new = eIDX_Shading_CCT_ALight;
-        	}
-			else
-			{
-				eIdx_Shading_CCT_new = eIDX_Shading_CCT_CWF;
-			} 
-#else
 			eIdx_Shading_CCT_new = eIDX_Shading_CCT_ALight;
-#endif
-
         }
         else if ( i4CCT < THL2 )
         {
@@ -700,20 +644,21 @@ evaluate_Shading_CCT_index  (
         }
         else
         {
-        	//20130103 Jouny
-        	if(i4DFIDX < TH3)
-        	{
-        		eIdx_Shading_CCT_new = eIDX_Shading_CCT_CWF;
-        	}
-			else
-			{
-            	eIdx_Shading_CCT_new = eIDX_Shading_CCT_D65;
-			}
-
-
+            eIdx_Shading_CCT_new = eIDX_Shading_CCT_D65;
         }
         break;
     }
+	/*if(eIdx_Shading_CCT_new==eIDX_Shading_CCT_CWF)//fred
+        	{
+		if((i4CCT >4673)&&(i4CCT < 5155))//cct customization
+			{if((i4SenceLV >45)&&(i4SenceLV <85))//lv customization
+			{if((i4DF_idx<=-7)&&(i4DF_idx>=15))//i4df_idx and i4f_idx customixation
+			{
+            	eIdx_Shading_CCT_new = eIDX_Shading_CCT_D65;
+			}
+        }
+    }
+		}//fred*/
 //#if ENABLE_MY_LOG
     if  ( rCamInfo.eIdx_Shading_CCT != eIdx_Shading_CCT_new )
     {

@@ -220,6 +220,13 @@ ifeq (yes, $(strip $(MTK_GEMINI_3G_SWITCH)))
   ifneq (yes, $(strip $(GEMINI)))
     $(call dep-err-ona-or-offb, GEMINI, MTK_GEMINI_3G_SWITCH)
   endif
+  ifeq (0, $(strip $(MTK_GEMINI_SMART_3G_SWITCH)))
+    $(call dep-err-seta-or-offb, MTK_GEMINI_SMART_3G_SWITCH,>=1,MTK_GEMINI_3G_SWITCH)
+  endif
+else
+  ifneq (0, $(strip $(MTK_GEMINI_SMART_3G_SWITCH)))
+    $(call dep-err-seta-or-onb, MTK_GEMINI_SMART_3G_SWITCH,0,MTK_GEMINI_3G_SWITCH)
+  endif
 endif
 
 ifeq (yes, $(strip $(MTK_GEMINI_ENHANCEMENT)))
