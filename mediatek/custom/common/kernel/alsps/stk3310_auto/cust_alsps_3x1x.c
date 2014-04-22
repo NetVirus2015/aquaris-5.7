@@ -75,7 +75,7 @@ static struct alsps_hw cust_alsps_hw = {
 
    	.state_val = 0x0,		/* disable all */
 	.psctrl_val = 0x63,		/* ps_persistance=4, ps_gain=64X, PS_IT=0.391ms */
-	.alsctrl_val = 0x3a,	/* als_persistance=1, als_gain=64X, ALS_IT=50ms */
+	.alsctrl_val = 0x39,	/* als_persistance=1, als_gain=64X, ALS_IT=50ms */
 	.ledctrl_val = 0xFF,	/* 100mA IRDR, 64/64 LED duty */
 	.wait_val = 0x7,		/* 50 ms */
     .ps_high_thd_val = 1700,

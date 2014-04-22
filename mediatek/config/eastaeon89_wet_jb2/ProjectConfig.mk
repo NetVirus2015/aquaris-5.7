@@ -269,7 +269,7 @@ KBUILD_OUTPUT_SUPPORT=yes
 # There is requirement to implement UMTS TDD specific features in AP side, while have no such UMTS TDD specific options available.
 MODEM_UMTS_TDD128_MODE=no
 MTK_2IN1_SPK_SUPPORT=no
-MTK_2SDCARD_SWAP=yes
+MTK_2SDCARD_SWAP=no
 
 # yes: enable this feature
 # no: disable this feature
